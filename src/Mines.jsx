@@ -50,7 +50,7 @@ function MinesComponent() {
           </React.Fragment>
         ))}
       </div>
-      <p id="scoreCard">Score {score}</p>
+      <p id="scoreCard">Score: {score}</p>
       {gameOver && (
         <div className="popup">
           <h2>Game Over</h2>
