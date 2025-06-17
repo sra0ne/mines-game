@@ -78,6 +78,9 @@ function MinesComponent() {
           <button onClick={resetGame}>Play Again</button>
         </div>
       )}
+      <footer className="footer">
+        <p>Made with ❤️ by <a href="https://github.com/sra0ne" target="_blank" rel="noopener noreferrer">sravan</a></p>
+      </footer>
     </div>
   );
 }
