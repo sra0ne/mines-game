@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import './Mines.css';
 
-const bomb = Math.floor(Math.random() * 25);
+function bombGenerator() {
+const b = Math.floor(Math.random() * 25);
+return b;
+}
 
 function MinesComponent() {
   const [score, setScore] = useState(0);
   const [buttons, setButtons] = useState(Array(25).fill("X"));
   const [disabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [bomb, setBomb] = useState(bombGenerator());
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
@@ -30,6 +34,7 @@ function MinesComponent() {
     setScore(0);
     setDisabled(false);
     setGameOver(false);
+    setBomb(bombGenerator());
   }
 
   return (
