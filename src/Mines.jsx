@@ -7,6 +7,7 @@ function bombGenerator() {
   return b;
 }
 
+
 function MinesComponent() {
   const [score, setScore] = useState(0);
   const [buttons, setButtons] = useState(Array(25).fill("X"));
@@ -14,6 +15,7 @@ function MinesComponent() {
   const [gameOver, setGameOver] = useState(false);
   const [bomb, setBomb] = useState(bombGenerator());
   const [gameOutcome, setGameOutcome] = useState("");
+  console.log("Bomb is at: ", bomb);
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
@@ -49,7 +51,7 @@ function MinesComponent() {
   }
 
   return (
-    
+
     <div className="mine-container">
       <h1 className="mine-title">Mines</h1>
       <div className="mine-grid">
@@ -63,7 +65,7 @@ function MinesComponent() {
             >
               {buttons[i]}
             </button>
-            {(i + 1) % 5 === 0 && <br key={`br-${i}`} />}
+
           </React.Fragment>
         ))}
       </div>

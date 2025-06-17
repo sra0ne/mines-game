@@ -1,25 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
+
 .mine-container {
+  font-family: 'Shippori Antique B1', sans-serif;
   text-align: center;
-  padding: 40px;
+  padding: 20px;
   background: linear-gradient(135deg, #f5f7fa, #e4eaf1);
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
+
 .mine-title {
-  font-size: 32px;
+  font-size: clamp(24px, 6vw, 32px);
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #4a00e0;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .mine-button {
-  width: 55px;         
-  height: 55px;        
+  aspect-ratio: 1;
+  min-width: 50px;
+  min-height: 50px;
   padding: 0;
-  margin: 0.5px;          
-  font-size: 24px;     
+  font-size: clamp(18px, 4vw, 30px);
   border-radius: 11px;
   border: none;
   background-color: #a18cd1;
@@ -28,8 +35,10 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 .mine-button:hover {
@@ -37,18 +46,22 @@
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
-.popup{
+
+.popup {
   font-size: 20px;
   font-weight: bold;
+  padding: 0px;
 }
-.popup h2{
-  color:red;
+
+.popup h2 {
+  color: red;
   margin-bottom: 20px;
 }
-.popup button{
+
+.popup button {
   background-color: #a18cd1;
   color: white;
-    font-weight: bold;
+  font-weight: bold;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   padding: 10px 20px;
@@ -56,9 +69,68 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
+  font-family: 'Shippori Antique B1', sans-serif;
 }
+
 .popup button:hover {
   background-color: #7b6cb1;
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.mine-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5px;
+  max-width: 350px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+#scoreCard {
+  font-size: clamp(18px, 4vw, 20px);
+  font-weight: bold;
+  color: #4a00e0;
+  margin: 5px 0;
+}
+
+@media (max-width: 480px) {
+  .mine-container {
+    padding: 15px;
+  }
+
+  .mine-grid {
+    max-width: 280px;
+    gap: 3px;
+  }
+
+  .mine-button {
+    min-width: 45px;
+    min-height: 45px;
+    border-radius: 6px;
+  }
+
+  .popup {
+    font-size: 18px;
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .popup button {
+    font-size: 16px;
+    padding: 8px 16px;
+
+  }
+}
+
+@media (max-width: 320px) {
+  .mine-grid {
+    max-width: 250px;
+    gap: 2px;
+  }
+
+  .mine-button {
+    min-width: 40px;
+    min-height: 40px;
+  }
 }
