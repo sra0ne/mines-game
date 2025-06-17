@@ -15,7 +15,7 @@ function MinesComponent() {
   const [gameOver, setGameOver] = useState(false);
   const [bomb, setBomb] = useState(bombGenerator());
   const [gameOutcome, setGameOutcome] = useState("");
-  console.log("Bomb is at: ", bomb);
+  //console.log("Bomb is at: ", bomb); debug
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
