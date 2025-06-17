@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import './Mines.css';
 
 function bombGenerator() {
-const b = Math.floor(Math.random() * 25);
-return b;
+  const b = Math.floor(Math.random() * 25);
+  return b;
 }
 
 function MinesComponent() {
@@ -12,6 +13,7 @@ function MinesComponent() {
   const [disabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [bomb, setBomb] = useState(bombGenerator());
+  const [gameOutcome, setGameOutcome] = useState("");
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
@@ -22,12 +24,20 @@ function MinesComponent() {
       setButtons(newButtons);
       setDisabled(true);
       setGameOver(true);
+      setGameOutcome("Game Over!");
     } else {
       newButtons[i] = "💎";
       setButtons(newButtons);
       setScore(score + 1);
     }
   }
+  useEffect(() => {
+    if (score === 24) {
+      setGameOver(true);
+      setDisabled(true);
+      setGameOutcome("You Win!");
+    }
+  }, [score]);
 
   function resetGame() {
     setButtons(Array(25).fill("X"));
@@ -35,9 +45,11 @@ function MinesComponent() {
     setDisabled(false);
     setGameOver(false);
     setBomb(bombGenerator());
+    setGameOutcome("");
   }
 
   return (
+    
     <div className="mine-container">
       <h1 className="mine-title">Mines</h1>
       <div className="mine-grid">
@@ -56,9 +68,10 @@ function MinesComponent() {
         ))}
       </div>
       <p id="scoreCard">Score: {score}</p>
+
       {gameOver && (
         <div className="popup">
-          <h2>Game Over</h2>
+          <h2>{gameOutcome}</h2>
           <p>Your score is {score}</p>
           <button onClick={resetGame}>Play Again</button>
         </div>
