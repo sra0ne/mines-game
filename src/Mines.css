@@ -114,6 +114,10 @@
   text-decoration: underline;
 }
 
+#mineSlider{
+  cursor: pointer;
+}
+
 
 @media (max-width: 480px) {
   .mine-container {

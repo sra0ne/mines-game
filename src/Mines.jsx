@@ -1,27 +1,34 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Mines.css';
 
-function bombGenerator() {
-  const b = Math.floor(Math.random() * 25);
-  return b;
+function bombGenerator(count) {
+  const bombIndices = new Set();
+  while (bombIndices.size < count) {
+    bombIndices.add(Math.floor(Math.random() * 25));
+  }
+  return Array.from(bombIndices);
 }
-
 
 function MinesComponent() {
   const [score, setScore] = useState(0);
   const [buttons, setButtons] = useState(Array(25).fill("X"));
   const [disabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [bomb, setBomb] = useState(bombGenerator());
+  const [bombs, setBombs] = useState(bombGenerator(1)); 
+  const [numMines, setNumMines] = useState(1);
   const [gameOutcome, setGameOutcome] = useState("");
-  //console.log("Bomb is at: ", bomb); debug
+
+  /* useEffect(() => {
+    console.log(bombs.join(", "));
+      
+    },[bombs]); //debug
+  */  
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
 
     const newButtons = [...buttons];
-    if (i === bomb) {
+    if (bombs.includes(i)) {
       newButtons[i] = "💣";
       setButtons(newButtons);
       setDisabled(true);
@@ -33,42 +40,59 @@ function MinesComponent() {
       setScore(score + 1);
     }
   }
+
   useEffect(() => {
-    if (score === 24) {
+    if (score === 25 - numMines) {
       setGameOver(true);
       setDisabled(true);
       setGameOutcome("You Win!");
     }
-  }, [score]);
+  }, [score, numMines]);
 
   function resetGame() {
     setButtons(Array(25).fill("X"));
     setScore(0);
     setDisabled(false);
     setGameOver(false);
-    setBomb(bombGenerator());
+    setBombs(bombGenerator(numMines));
     setGameOutcome("");
   }
 
-  return (
+  function changeMineNo(e) {
+    const newCount = parseInt(e.target.value);
+    setNumMines(newCount);
+    setBombs(bombGenerator(newCount));
+    resetGame();
+  }
 
+  return (
     <div className="mine-container">
       <h1 className="mine-title">Mines</h1>
-      <div className="mine-grid">
-        {Array.from({ length: 25 }, (_, i) => (
-          <React.Fragment key={i}>
-            <button
-              className="mine-button"
-              onClick={() => handleClick(i)}
-              disabled={disabled || buttons[i] !== "X"}
-              style={buttons[i] === "💣" ? { backgroundColor: "#ff6b6b" } : {}}
-            >
-              {buttons[i]}
-            </button>
+      <label htmlFor="mineSlider">Mines: {numMines}</label>
+      <input
+        type="range"
+        min="1"
+        max="24"
+        className="mine-number"
+        id="mineSlider"
+        value={numMines}
+        onChange={changeMineNo}
+      />
 
-          </React.Fragment>
+      <div className="mine-grid">
+        {buttons.map((value, i) => (
+          <button
+            key={i}
+            className="mine-button"
+            onClick={() => handleClick(i)}
+            disabled={disabled || value !== "X"}
+            style={value === "💣" ? { backgroundColor: "#ff6b6b" } : {}}
+          >
+            {value}
+          </button>
         ))}
       </div>
+
       <p id="scoreCard">Score: {score}</p>
 
       {gameOver && (
@@ -78,8 +102,11 @@ function MinesComponent() {
           <button onClick={resetGame}>Play Again</button>
         </div>
       )}
+
       <footer className="footer">
-        <p>Made with ❤️ by <a href="https://github.com/sra0ne" target="_blank" rel="noopener noreferrer">sravan</a></p>
+        <p>
+          Made with ❤️ by <a href="https://github.com/sra0ne" target="_blank" rel="noopener noreferrer">sravan</a>
+        </p>
       </footer>
     </div>
   );
