@@ -14,15 +14,11 @@ function MinesComponent() {
   const [buttons, setButtons] = useState(Array(25).fill("X"));
   const [disabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [bombs, setBombs] = useState(bombGenerator(1)); 
+  const [bombs, setBombs] = useState(bombGenerator(1));
   const [numMines, setNumMines] = useState(1);
   const [gameOutcome, setGameOutcome] = useState("");
 
-  /* useEffect(() => {
-    console.log(bombs.join(", "));
-      
-    },[bombs]); //debug
-  */  
+
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
@@ -43,18 +39,38 @@ function MinesComponent() {
 
   useEffect(() => {
     if (score === 25 - numMines) {
-      setGameOver(true);
       setDisabled(true);
+      setGameOver(true);
       setGameOutcome("You Win!");
     }
   }, [score, numMines]);
 
-  function resetGame() {
+  useEffect(() => {
+    if (gameOver) {
+      const updatedButtons = [...buttons];
+      for (let i = 0; i < updatedButtons.length; i++) {
+        if (bombs.includes(i)) {
+          updatedButtons[i] = "💣";
+        } else if (updatedButtons[i] === "X") {
+          updatedButtons[i] = "💎";
+        }
+      }
+      setButtons(updatedButtons);
+    }
+  }, [gameOver, bombs]);
+
+  /* useEffect(() => {
+    console.log(bombs.join(", "));
+
+  }, [bombs]); //debug
+  */
+  
+  function resetGame(newMineCount = numMines) {
     setButtons(Array(25).fill("X"));
     setScore(0);
     setDisabled(false);
     setGameOver(false);
-    setBombs(bombGenerator(numMines));
+    setBombs(bombGenerator(newMineCount));
     setGameOutcome("");
   }
 
@@ -62,7 +78,7 @@ function MinesComponent() {
     const newCount = parseInt(e.target.value);
     setNumMines(newCount);
     setBombs(bombGenerator(newCount));
-    resetGame();
+    resetGame(newCount);
   }
 
   return (
@@ -99,7 +115,7 @@ function MinesComponent() {
         <div className="popup">
           <h2>{gameOutcome}</h2>
           <p>Your score is {score}</p>
-          <button onClick={resetGame}>Play Again</button>
+          <button onClick={() => resetGame(numMines)}>Play Again</button>
         </div>
       )}
 
