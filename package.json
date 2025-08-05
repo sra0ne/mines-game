@@ -2,29 +2,121 @@
   
   
   "name": "mines-game",
+  
+  
   "private": true,
+  
+  
   "version": "0.0.0",
+  
+  
   "type": "module",
+  
+  
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  
+  
     
+  
+  "dev": "vite --host",
+  
+  
+    
+  
+  "build": "vite build",
+  
+  
+    
+  
+  "lint": "eslint .",
+  
+  
+    
+  
+  "preview": "vite preview"
+  
+  
   },
+  
+  
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+  
+  
+    
+  
+  "axios": "^1.11.0",
+  
+  
+    
+  
+  "cors": "^2.8.5",
+  
+  
+    
+  
+  "dotenv": "^17.2.1",
+  
+  
+    
+  
+  "react": "^19.1.0",
+  
+  
+    
+  
+  "react-dom": "^19.1.0"
+  
+  
   },
+  
+  
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "vite": "^6.3.5"
+  
+  
+    
+  
+  "@eslint/js": "^9.25.0",
+  
+  
+    
+  
+  "@types/react": "^19.1.2",
+  
+  
+    
+  
+  "@types/react-dom": "^19.1.2",
+  
+  
+    
+  
+  "@vitejs/plugin-react": "^4.4.1",
+  
+  
+    
+  
+  "eslint": "^9.25.0",
+  
+  
+    
+  
+  "eslint-plugin-react-hooks": "^5.2.0",
+  
+  
+    
+  
+  "eslint-plugin-react-refresh": "^0.4.19",
+  
+  
+    
+  
+  "globals": "^16.0.0",
+  
+  
+    
+  
+  "vite": "^6.3.5"
+  
+  
   }
 }
