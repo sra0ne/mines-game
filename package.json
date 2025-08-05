@@ -14,16 +14,15 @@
   
   
   "scripts": {
-  
+    
   
     
   
-  "dev": "vite --host",
+  "dev":  "concurrently \"npm run dev --prefix server\" \"vite\"",
   
   
-    
   
-  "build": "vite build",
+  "build": "vite build ",
   
   
     
@@ -64,7 +63,12 @@
   
     
   
-  "react-dom": "^19.1.0"
+  "react-dom": "^19.1.0",
+  
+  
+    
+  
+  "react-hot-toast": "^2.5.2"
   
   
   },

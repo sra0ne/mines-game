@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './Mines.css';
+import React, { useState, useEffect } from "react";
+import "./Mines.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function bombGenerator(count) {
   const bombIndices = new Set();
@@ -16,12 +18,16 @@ function MinesComponent() {
   const [gameOver, setGameOver] = useState(false);
   const [bombs, setBombs] = useState(bombGenerator(1));
   const [numMines, setNumMines] = useState(1);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [playerName, setPlayerName] = useState("");
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
+  const [timeTaken, setTimeTaken] = useState(0);
   const [gameOutcome, setGameOutcome] = useState("");
-
-
 
   function handleClick(i) {
     if (buttons[i] !== "X" || disabled) return;
+
+    if (!gameStarted) setGameStarted(true);
 
     const newButtons = [...buttons];
     if (bombs.includes(i)) {
@@ -38,10 +44,21 @@ function MinesComponent() {
   }
 
   useEffect(() => {
+    let timer;
+    if (gameStarted && !gameOver) {
+      timer = setInterval(() => {
+        setTimeTaken((prevTime) => prevTime + 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [gameStarted, gameOver]);
+
+  useEffect(() => {
     if (score === 25 - numMines) {
       setDisabled(true);
       setGameOver(true);
       setGameOutcome("You Win!");
+      setGameStarted(false);
     }
   }, [score, numMines]);
 
@@ -60,11 +77,30 @@ function MinesComponent() {
   }, [gameOver, bombs]);
 
   /* useEffect(() => {
-    console.log(bombs.join(", "));
+    const sortedBombs = [...bombs].sort((a, b) => a - b);
+    console.log(sortedBombs.join(", "));
+  }, [bombs]); // debug
+*/
 
-  }, [bombs]); //debug
-  */
-  
+  async function handleSubmitScore(e) {
+    e.preventDefault();
+    if (!playerName.trim()) return;
+    const scoreData = {
+      name: playerName,
+      time: timeTaken,
+      level: numMines,
+    };
+    try {
+      await axios.post("http://localhost:8080/api/scores", scoreData);
+      setPlayerName("");
+      setScoreSubmitted((prev) => !prev);
+      toast.success("Score submitted successfully!");
+    } catch (error) {
+      console.error("Failed to submit score:", error);
+      toast.error("Failed to submit score");
+    }
+  }
+
   function resetGame(newMineCount = numMines) {
     setButtons(Array(25).fill("X"));
     setScore(0);
@@ -72,6 +108,10 @@ function MinesComponent() {
     setGameOver(false);
     setBombs(bombGenerator(newMineCount));
     setGameOutcome("");
+    setGameStarted(false);
+    setTimeTaken(0);
+    setPlayerName("");
+    setScoreSubmitted(false);
   }
 
   function changeMineNo(e) {
@@ -115,13 +155,42 @@ function MinesComponent() {
         <div className="popup">
           <h2>{gameOutcome}</h2>
           <p>Your score is {score}</p>
-          <button onClick={() => resetGame(numMines)}>Play Again</button>
+          {gameOutcome === "You Win!" && !scoreSubmitted && (
+            <div>
+              <p>Your time: {timeTaken} seconds</p>
+              <form onSubmit={handleSubmitScore} className="submit-score-form">
+                <input
+                  className="name-box"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          )}
+
+          <button
+            className="play-again-button"
+            onClick={() => resetGame(numMines)}
+          >
+            Play Again
+          </button>
         </div>
       )}
 
       <footer className="footer">
         <p>
-          Made with ❤️ by <a href="https://github.com/sra0ne" target="_blank" rel="noopener noreferrer">sravan</a>
+          Made with ❤️ by{" "}
+          <a
+            href="https://github.com/sra0ne"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            sravan
+          </a>
         </p>
       </footer>
     </div>

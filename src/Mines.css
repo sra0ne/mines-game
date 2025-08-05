@@ -117,6 +117,44 @@
 #mineSlider{
   cursor: pointer;
 }
+.name-box {
+  font-family: 'Shippori Antique B1', sans-serif;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  
+  background-color: #f0f0f5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: #333;
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 0px;
+}
+
+.name-box:focus {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid #a18cd1;
+}
+
+.submit-score-form {
+  display: flex;
+  gap: 10px; 
+  align-items: center; 
+}
+
+.play-again-button{
+  margin-top: 10px;
+}
+
+
+
+
+
+
 
 
 @media (max-width: 480px) {
