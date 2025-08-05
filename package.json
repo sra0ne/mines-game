@@ -14,13 +14,14 @@
   
   
   "scripts": {
+  
+  
     
   
+  "dev": "concurrently \"npm run dev --prefix server\" \"vite\"",
+  
+  
     
-  
-  "dev":  "concurrently \"npm run dev --prefix server\" \"vite\"",
-  
-  
   
   "build": "vite build ",
   
@@ -44,6 +45,11 @@
     
   
   "axios": "^1.11.0",
+  
+  
+    
+  
+  "concurrently": "^9.2.0",
   
   
     
