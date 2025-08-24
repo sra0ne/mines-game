@@ -149,6 +149,20 @@
 .play-again-button{
   margin-top: 10px;
 }
+.leaderboard-link {
+  display: block;
+  margin-top: 5 px;
+  margin-bottom: 15px;
+  color: #4a00e0;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.leaderboard-link:hover {
+  text-decoration: underline;
+  color: #7b6cb1;
+}
+
 
 
 

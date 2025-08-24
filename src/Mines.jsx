@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Mines.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 function bombGenerator(count) {
   const bombIndices = new Set();
@@ -76,11 +77,10 @@ function MinesComponent() {
     }
   }, [gameOver, bombs]);
 
-  /* useEffect(() => {
-    const sortedBombs = [...bombs].sort((a, b) => a - b);
-    console.log(sortedBombs.join(", "));
-  }, [bombs]); // debug
-*/
+  // useEffect(() => {
+  //   const sortedBombs = [...bombs].sort((a, b) => a - b);
+  //   console.log(sortedBombs.join(", "));
+  // }, [bombs]); // debug
 
   async function handleSubmitScore(e) {
     e.preventDefault();
@@ -124,7 +124,7 @@ function MinesComponent() {
   return (
     <div className="mine-container">
       <h1 className="mine-title">Mines</h1>
-      <label htmlFor="mineSlider">Mines: {numMines}</label>
+      <label htmlFor="mineSlider">Level: {numMines}</label>
       <input
         type="range"
         min="1"
@@ -154,7 +154,9 @@ function MinesComponent() {
       {gameOver && (
         <div className="popup">
           <h2>{gameOutcome}</h2>
-          <p>Your score is {score}</p>
+          <Link to={`/leaderboard/${numMines}`}>
+            <p className="leaderboard-link">Go to Leaderboard</p>
+          </Link>
           {gameOutcome === "You Win!" && !scoreSubmitted && (
             <div>
               <p>Your time: {timeTaken} seconds</p>
