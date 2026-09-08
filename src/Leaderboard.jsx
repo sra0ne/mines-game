@@ -13,7 +13,7 @@ function Leaderboard() {
     const fetchScores = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:8080/api/scores/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores/${id}`);
         setScores(res.data);
       } catch (err) {
         console.error("Failed to fetch leaderboard:", err);

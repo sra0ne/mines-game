@@ -91,7 +91,7 @@ function MinesComponent() {
       level: numMines,
     };
     try {
-      await axios.post("http://localhost:8080/api/scores", scoreData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/scores`, scoreData);
       setPlayerName("");
       setScoreSubmitted((prev) => !prev);
       toast.success("Score submitted successfully!");
