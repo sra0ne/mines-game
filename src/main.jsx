@@ -7,7 +7,13 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <App />
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            fontFamily: "'Shippori Antique B1', Verdana, sans-serif",
+          },
+        }}
+      />
     </BrowserRouter>
   </StrictMode>
 );

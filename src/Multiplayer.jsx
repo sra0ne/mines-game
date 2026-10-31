@@ -67,11 +67,6 @@ function Multiplayer() {
       setBoard(data.board);
       setPlayers(data.players);
       setCurrentTurn(data.currentTurn);
-      if (data.lastMove) {
-        toast(`${data.lastMove.player} found a diamond! 💎`, {
-          duration: 1500,
-        });
-      }
     };
 
     const onGameOver = (data) => {
@@ -279,7 +274,7 @@ function Multiplayer() {
                   {myPlayer?.name || "You"} (You)
                 </span>
                 <span className="mp-player-score">
-                  Gems: <strong>{myPlayer?.score || 0}</strong>
+                  Score: <strong>{myPlayer?.score || 0}</strong>
                 </span>
               </div>
             </div>
@@ -296,7 +291,7 @@ function Multiplayer() {
                   {opponent?.name || "Opponent"}
                 </span>
                 <span className="mp-player-score">
-                  Gems: <strong>{opponent?.score || 0}</strong>
+                  Score: <strong>{opponent?.score || 0}</strong>
                 </span>
               </div>
             </div>
@@ -340,7 +335,6 @@ function Multiplayer() {
           </div>
 
           <div className="mp-match-meta">
-            <span>Mines hidden: <strong>{numMines}</strong></span>
             <button className="mp-leave-btn" onClick={handleLeaveMatch}>
               Leave Match
             </button>

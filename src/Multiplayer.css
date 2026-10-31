@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
+
 .mp-container {
   font-family: 'Shippori Antique B1', Verdana, sans-serif;
   text-align: center;
@@ -371,7 +373,7 @@
 
 .mp-match-meta {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 315px;
