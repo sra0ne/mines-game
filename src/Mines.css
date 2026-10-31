@@ -211,3 +211,29 @@
     min-height: 40px;
   }
 }
+
+
+.mode-nav-bar {
+  margin-bottom: 12px;
+}
+
+.multiplayer-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #4a00e0, #8e2de2);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(74, 0, 224, 0.25);
+  transition: all 0.3s ease;
+}
+
+.multiplayer-nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 0, 224, 0.35);
+  color: white;
+}

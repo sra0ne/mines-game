@@ -77,10 +77,6 @@ function MinesComponent() {
     }
   }, [gameOver, bombs]);
 
-  // useEffect(() => {
-  //   const sortedBombs = [...bombs].sort((a, b) => a - b);
-  //   console.log(sortedBombs.join(", "));
-  // }, [bombs]); // debug
 
   async function handleSubmitScore(e) {
     e.preventDefault();
@@ -123,6 +119,11 @@ function MinesComponent() {
 
   return (
     <div className="mine-container">
+      <div className="mode-nav-bar">
+        <Link to="/multiplayer" className="multiplayer-nav-btn">
+          Play 1v1 Multiplayer
+        </Link>
+      </div>
       <h1 className="mine-title">Mines</h1>
       <label htmlFor="mineSlider">Level: {numMines}</label>
       <input
